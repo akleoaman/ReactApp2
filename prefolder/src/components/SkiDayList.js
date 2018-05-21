@@ -3,9 +3,15 @@ import SnowFlake from 'react-icons/lib/ti/weather-snow'
 import Calendar from 'react-icons/lib/fa/calendar'
 import {SkiDayRow} from './SkiDayRow'
 import { PropTypes } from 'react'
+import {Link } from 'react-router'
 
-export const SkiDayList = ({days}) => (
-    <table>
+export const SkiDayList = ({days, filter}) => {
+    const filteredDays= (!filter || !filter.match(/powder|backcountry/)) ?
+    days: 
+    days.filter(day => day[filter])
+    return(
+      <div className="ski-day-list">
+  <table>
           <thead>
                 <tr>
                     <th>Date </th>
@@ -13,17 +19,33 @@ export const SkiDayList = ({days}) => (
                     <th>Powder </th>
                     <th>Backcounrtry </th>
                 </tr>
+                <tr>
+                      <td colSpan={4}>
+                      <Link to="list-days">
+                      All days
+                      </Link>
+                      <Link to="list-days/powder">
+                      Powder days
+                      </Link>
+                      <Link to="list-days/backcountry">
+                      BACKCOUNTRY days
+                      </Link>
+                    </td>
+                </tr>
             </thead>
             <tbody>
-                {days.map((day, i) =>
+                {filteredDays.map((day, i) =>
                 <SkiDayRow key={i}
                            {...day}
            /> )}
             </tbody>
         </table>
+    </div>
 
 )
 
+}
+  
 SkiDayList.propTypes = {
     days: function(props) {
         if(!Array.isArray(props.days)){
