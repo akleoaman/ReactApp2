@@ -12,7 +12,7 @@ const MainMenu = () => {
             	}}>
             	About
             </Link>
-            <Link to="members" 
+            <Link to="member-list" 
             	  activeStyle={{
             	  	backgroundColor: "white", 
             	  	color: "slategray"

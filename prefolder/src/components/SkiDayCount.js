@@ -1,5 +1,4 @@
-
-import '../stylesheets/ui.scss'
+import '../components/stylesheets/ui.scss'
 import Terrain from 'react-icons/lib/md/terrain'
 import SnowFlake from 'react-icons/lib/ti/weather-snow'
 import Calendar from 'react-icons/lib/fa/calendar'
@@ -13,7 +12,9 @@ import {PropTypes} from 'react'
     }
     
      
-    export const SkiDayCount = ({total = 70, powder= 20, backcountry= 34, goal= 45}) => (
+    export const SkiDayCount = ({total = 70, powder= 20, 
+                                backcountry= 34, goal= 45}) => 
+            (
         
             <div className="ski-day-count">
               <div className="total-days">

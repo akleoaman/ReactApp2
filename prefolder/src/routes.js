@@ -10,7 +10,7 @@ const routes = (
       <Route path="/" component= {Home} />
       <Route path="/" component={Right}>
           <Route path="about" component={About} />
-          <Route path="members" component={MemberList} />
+          <Route path="member-list" component={MemberList} />
         </Route>
       <Route path="*" component= {Whoops404} />
    </Router>
