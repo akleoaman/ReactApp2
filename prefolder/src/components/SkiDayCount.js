@@ -43,7 +43,8 @@ import {PropTypes} from 'react'
         SkiDayCount.propTypes = {
           total: PropTypes.number,
               powder: PropTypes.number,
-              backcountry: PropTypes.number
+              backcountry: PropTypes.number,
+              goal: PropTypes.number
              
       }
     
