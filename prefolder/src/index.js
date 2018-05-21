@@ -9,6 +9,5 @@ window.React = React
 
 render(
  <App/>,
-   
-    document.getElementById('react-container')
+   document.getElementById('react-container')
 )
