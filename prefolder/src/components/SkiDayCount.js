@@ -12,7 +12,7 @@ import Calendar from 'react-icons/lib/fa/calendar'
     }
     
      
-    export const SkiDayCount = ({total, powder, backcountry, goal}) => (
+    export const SkiDayCount = ({total = 70, powder= 20, backcountry= 34, goal= 45}) => (
         
             <div className="ski-day-count">
               <div className="total-days">
@@ -39,4 +39,4 @@ import Calendar from 'react-icons/lib/fa/calendar'
             </div>
         )
     
-
+   

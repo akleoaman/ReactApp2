@@ -1,11 +1,14 @@
 import React from 'react'
 import {render} from 'react-dom'
 import { SkiDayList } from './components/SkiDayList'
+import { SkiDayCount } from './components/SkiDayCount';
 
 window.React = React
 
 render(
-  <SkiDayList days= {
+  <SkiDayCount />,
+  
+  /*<SkiDayList days= {
     [
       {
         resort: "Squaw Valley",
@@ -26,7 +29,7 @@ render(
         backcountry: true
       }
     ]
-  }/>,
+  }/>,*/
    
     document.getElementById('react-container')
 )
