@@ -1,11 +1,12 @@
-import { createClass } from 'react'
+import { Component } from 'react'
 import { SkiDayList } from './SkiDayList'
 import { SkiDayCount } from './SkiDayCount'
 
 
-export const App = createClass({
-    getInitialState(){
-        return{
+export class App extends Component{
+    constructor(props){
+        super(props)
+        this.state ={
             allSkiDays:
             [{
                 resort: "Squaw Valley",
@@ -26,9 +27,12 @@ export const App = createClass({
                 backcountry: true
             }
             ]
+
         }
-    },
+    }
+   
     countDays(filter){
+
         return this.state.allSkiDays.filter(function(day){
                if(filter) {
                    return day[filter]
@@ -37,7 +41,7 @@ export const App = createClass({
                    return day
                }
         }).length
-    },
+    }
     render()
     {
         return(
@@ -52,7 +56,7 @@ export const App = createClass({
             </div>
         )
     }
-})
+}
 
 
 
