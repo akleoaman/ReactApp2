@@ -4,6 +4,7 @@ import Home from './components/ui/Home'
 import About from './components/ui/About'
 import MemberList from './components/ui/MemberList'
 import {Left, Right, Whoops404} from './components'
+import { SkiDayList } from './components/SkiDayList';
 
 const routes = (
     <Router history={hashHistory}>
