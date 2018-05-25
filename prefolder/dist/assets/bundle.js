@@ -56,21 +56,19 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _Member = __webpack_require__(247);
+	var _Member = __webpack_require__(241);
 
 	var _Member2 = _interopRequireDefault(_Member);
+
+	var _MemberList = __webpack_require__(238);
+
+	var _MemberList2 = _interopRequireDefault(_MemberList);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.React = _react2.default;
 
-	(0, _reactDom.render)(_react2.default.createElement(_Member2.default, { admin: true,
-			name: 'Amandeep Kaur',
-			email: 'akleoaman@gmail.com',
-			thumbnail: 'http://localhost:3000/assets/img/aman.jpg',
-			makeAdmin: function makeAdmin(email) {
-					return console.log(email);
-			} }), document.getElementById('react-container'));
+	(0, _reactDom.render)(_react2.default.createElement(_MemberList2.default, null), document.getElementById('react-container'));
 
 /***/ },
 /* 1 */
@@ -21431,9 +21429,9 @@
 
 	var _MemberList2 = _interopRequireDefault(_MemberList);
 
-	var _components = __webpack_require__(241);
+	var _components = __webpack_require__(243);
 
-	var _SkiDayList = __webpack_require__(242);
+	var _SkiDayList = __webpack_require__(244);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27441,6 +27439,8 @@
 	    value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -27448,6 +27448,10 @@
 	var _isomorphicFetch = __webpack_require__(239);
 
 	var _isomorphicFetch2 = _interopRequireDefault(_isomorphicFetch);
+
+	var _Member = __webpack_require__(241);
+
+	var _Member2 = _interopRequireDefault(_Member);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27460,15 +27464,34 @@
 	var MemberList = function (_Component) {
 	    _inherits(MemberList, _Component);
 
-	    function MemberList() {
+	    function MemberList(props) {
 	        _classCallCheck(this, MemberList);
 
-	        return _possibleConstructorReturn(this, (MemberList.__proto__ || Object.getPrototypeOf(MemberList)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (MemberList.__proto__ || Object.getPrototypeOf(MemberList)).call(this, props));
+
+	        _this.state = {
+	            members: [{
+	                name: "Sarab",
+	                email: "sarab.thebest@gmail.com",
+	                thumbnail: "https://randomuser.me/api/portraits/men/53.jpg"
+	            }, {
+	                name: "anju",
+	                email: "anju.kaur@gmail.com",
+	                thumbnail: "https://randomuser.me/api/portraits/women/74.jpg"
+	            }, {
+	                name: "aman",
+	                email: "akleoaman@gmail.com",
+	                thumbnail: "https://randomuser.me/api/portraits/men/34.jpg"
+	            }]
+	        };
+	        return _this;
 	    }
 
 	    _createClass(MemberList, [{
 	        key: 'render',
 	        value: function render() {
+	            var members = this.state.members;
+
 	            return React.createElement(
 	                'div',
 	                { className: 'member-list' },
@@ -27476,7 +27499,14 @@
 	                    'h1',
 	                    null,
 	                    'Society Members'
-	                )
+	                ),
+	                members.map(function (data, i) {
+	                    return React.createElement(_Member2.default, _extends({ key: i,
+	                        onClick: function onClick(email) {
+	                            return console.log(email);
+	                        }
+	                    }, data));
+	                })
 	            );
 	        }
 	    }]);
@@ -27974,6 +28004,123 @@
 /* 241 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _shield = __webpack_require__(242);
+
+	var _shield2 = _interopRequireDefault(_shield);
+
+	var _react = __webpack_require__(1);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Member = function (_Component) {
+		_inherits(Member, _Component);
+
+		function Member() {
+			_classCallCheck(this, Member);
+
+			return _possibleConstructorReturn(this, (Member.__proto__ || Object.getPrototypeOf(Member)).apply(this, arguments));
+		}
+
+		_createClass(Member, [{
+			key: 'render',
+			value: function render() {
+				console.log("i am starting member rendering");
+				var _props = this.props,
+				    name = _props.name,
+				    thumbnail = _props.thumbnail,
+				    email = _props.email,
+				    admin = _props.admin,
+				    makeAdmin = _props.makeAdmin;
+
+				return React.createElement(
+					'div',
+					{ className: 'member' },
+					React.createElement(
+						'h1',
+						null,
+						name,
+						' ',
+						admin ? React.createElement(_shield2.default, null) : null
+					),
+					React.createElement(
+						'a',
+						{ onClick: makeAdmin },
+						'Make Admin'
+					),
+					React.createElement('img', { src: thumbnail, alt: 'profile picture' }),
+					React.createElement(
+						'p',
+						null,
+						React.createElement(
+							'a',
+							{ href: 'mailto:' + email },
+							email
+						)
+					)
+				);
+			}
+		}]);
+
+		return Member;
+	}(_react.Component);
+
+	exports.default = Member;
+
+/***/ },
+/* 242 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactIconBase = __webpack_require__(231);
+
+	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var FaShield = function FaShield(props) {
+	    return _react2.default.createElement(
+	        _reactIconBase2.default,
+	        _extends({ viewBox: '0 0 40 40' }, props),
+	        _react2.default.createElement(
+	            'g',
+	            null,
+	            _react2.default.createElement('path', { d: 'm29.8 21.4v-14.3h-10v25.4q2.6-1.4 4.7-3 5.3-4.1 5.3-8.1z m4.3-17.1v17.1q0 2-0.8 3.8t-1.8 3.4-2.7 2.8-2.8 2.3-2.7 1.8-2 1.1-0.9 0.4q-0.3 0.1-0.6 0.1t-0.6-0.1q-0.4-0.2-0.9-0.4t-2-1.1-2.7-1.8-2.9-2.3-2.6-2.8-1.9-3.4-0.7-3.8v-17.1q0-0.6 0.4-1t1-0.4h25.7q0.6 0 1 0.4t0.5 1z' })
+	        )
+	    );
+	};
+
+	exports.default = FaShield;
+	module.exports = exports['default'];
+
+/***/ },
+/* 243 */
+/***/ function(module, exports, __webpack_require__) {
+
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
@@ -28026,7 +28173,7 @@
 	};
 
 /***/ },
-/* 242 */
+/* 244 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28038,19 +28185,19 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	var _terrain = __webpack_require__(243);
+	var _terrain = __webpack_require__(245);
 
 	var _terrain2 = _interopRequireDefault(_terrain);
 
-	var _weatherSnow = __webpack_require__(244);
+	var _weatherSnow = __webpack_require__(246);
 
 	var _weatherSnow2 = _interopRequireDefault(_weatherSnow);
 
-	var _calendar = __webpack_require__(245);
+	var _calendar = __webpack_require__(247);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
-	var _SkiDayRow = __webpack_require__(246);
+	var _SkiDayRow = __webpack_require__(248);
 
 	var _react = __webpack_require__(1);
 
@@ -28149,7 +28296,7 @@
 	};
 
 /***/ },
-/* 243 */
+/* 245 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28186,7 +28333,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 244 */
+/* 246 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28223,7 +28370,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 245 */
+/* 247 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28260,7 +28407,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 246 */
+/* 248 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28270,15 +28417,15 @@
 	});
 	exports.SkiDayRow = undefined;
 
-	var _terrain = __webpack_require__(243);
+	var _terrain = __webpack_require__(245);
 
 	var _terrain2 = _interopRequireDefault(_terrain);
 
-	var _weatherSnow = __webpack_require__(244);
+	var _weatherSnow = __webpack_require__(246);
 
 	var _weatherSnow2 = _interopRequireDefault(_weatherSnow);
 
-	var _calendar = __webpack_require__(245);
+	var _calendar = __webpack_require__(247);
 
 	var _calendar2 = _interopRequireDefault(_calendar);
 
@@ -28323,123 +28470,6 @@
 		powder: _react.PropTypes.bool,
 		backcountry: _react.PropTypes.bool
 	};
-
-/***/ },
-/* 247 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _shield = __webpack_require__(248);
-
-	var _shield2 = _interopRequireDefault(_shield);
-
-	var _react = __webpack_require__(1);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Member = function (_Component) {
-		_inherits(Member, _Component);
-
-		function Member() {
-			_classCallCheck(this, Member);
-
-			return _possibleConstructorReturn(this, (Member.__proto__ || Object.getPrototypeOf(Member)).apply(this, arguments));
-		}
-
-		_createClass(Member, [{
-			key: 'render',
-			value: function render() {
-				console.log("i am starting member rendering");
-				var _props = this.props,
-				    name = _props.name,
-				    thumbnail = _props.thumbnail,
-				    email = _props.email,
-				    admin = _props.admin,
-				    makeAdmin = _props.makeAdmin;
-
-				return React.createElement(
-					'div',
-					{ className: 'member' },
-					React.createElement(
-						'h1',
-						null,
-						name,
-						' ',
-						admin ? React.createElement(_shield2.default, null) : null
-					),
-					React.createElement(
-						'a',
-						{ onClick: makeAdmin },
-						'Make Admin'
-					),
-					React.createElement('img', { src: thumbnail, alt: 'profile picture' }),
-					React.createElement(
-						'p',
-						null,
-						React.createElement(
-							'a',
-							{ href: 'mailto:' + email },
-							email
-						)
-					)
-				);
-			}
-		}]);
-
-		return Member;
-	}(_react.Component);
-
-	exports.default = Member;
-
-/***/ },
-/* 248 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactIconBase = __webpack_require__(231);
-
-	var _reactIconBase2 = _interopRequireDefault(_reactIconBase);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var FaShield = function FaShield(props) {
-	    return _react2.default.createElement(
-	        _reactIconBase2.default,
-	        _extends({ viewBox: '0 0 40 40' }, props),
-	        _react2.default.createElement(
-	            'g',
-	            null,
-	            _react2.default.createElement('path', { d: 'm29.8 21.4v-14.3h-10v25.4q2.6-1.4 4.7-3 5.3-4.1 5.3-8.1z m4.3-17.1v17.1q0 2-0.8 3.8t-1.8 3.4-2.7 2.8-2.8 2.3-2.7 1.8-2 1.1-0.9 0.4q-0.3 0.1-0.6 0.1t-0.6-0.1q-0.4-0.2-0.9-0.4t-2-1.1-2.7-1.8-2.9-2.3-2.6-2.8-1.9-3.4-0.7-3.8v-17.1q0-0.6 0.4-1t1-0.4h25.7q0.6 0 1 0.4t0.5 1z' })
-	        )
-	    );
-	};
-
-	exports.default = FaShield;
-	module.exports = exports['default'];
 
 /***/ }
 /******/ ]);
