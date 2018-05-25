@@ -28,7 +28,7 @@ export class App extends Component{
                 newDay
             ]}
         })
-        console.log(this.state)
+        
         
     }
    

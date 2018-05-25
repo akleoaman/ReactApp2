@@ -1,21 +1,17 @@
 import React from 'react'
 import { render } from 'react-dom'
-import './components/stylesheets/ui.scss'
-import './components/stylesheets/index.scss'
-import { App } from './components/App'
-import { Whoops404 } from './components/Whoops404'
-import { Router, Route, hashHistory } from 'react-router'
+import routes from './routes'
+import  Member from './components/ui/Member';
+
+
 
 window.React = React
 
 render(
-	<Router history={hashHistory}>
-		<Route path="/" component={App}/>
-		<Route path="list-day" component={App}>
-			<Route path=":filter" component={App} />
-		</Route>
-		<Route path="add-day" component={App} />
-		<Route path="*" component={Whoops404}/>
-	</Router>,
+	<Member admin={true}
+			name="Amandeep Kaur"
+			email="akleoaman@gmail.com"
+			thumbnail="http://localhost:3000/assets/img/aman.jpg"
+			makeAdmin={(email) => console.log(email)}/>, 
 	document.getElementById('react-container')
 )

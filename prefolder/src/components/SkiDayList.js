@@ -11,7 +11,7 @@ export const SkiDayList = ({days, filter}) => {
   		!filter.match(/powder|backcountry/))?
   		days:
   		days.filter(day => day[filter])
- console.log(filteredDays)
+ 
   return (
   	<div className="ski-day-list">
 	<table>
