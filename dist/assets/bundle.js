@@ -56,19 +56,11 @@
 
 	var _routes2 = _interopRequireDefault(_routes);
 
-	var _Member = __webpack_require__(241);
-
-	var _Member2 = _interopRequireDefault(_Member);
-
-	var _MemberList = __webpack_require__(238);
-
-	var _MemberList2 = _interopRequireDefault(_MemberList);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	window.React = _react2.default;
 
-	(0, _reactDom.render)(_react2.default.createElement(_MemberList2.default, null), document.getElementById('react-container'));
+	(0, _reactDom.render)(_routes2.default, document.getElementById('react-container'));
 
 /***/ },
 /* 1 */
@@ -27439,8 +27431,6 @@
 	    value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -27454,6 +27444,8 @@
 	var _Member2 = _interopRequireDefault(_Member);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -27470,27 +27462,65 @@
 	        var _this = _possibleConstructorReturn(this, (MemberList.__proto__ || Object.getPrototypeOf(MemberList)).call(this, props));
 
 	        _this.state = {
-	            members: [{
-	                name: "Sarab",
-	                email: "sarab.thebest@gmail.com",
-	                thumbnail: "https://randomuser.me/api/portraits/men/53.jpg"
-	            }, {
-	                name: "anju",
-	                email: "anju.kaur@gmail.com",
-	                thumbnail: "https://randomuser.me/api/portraits/women/74.jpg"
-	            }, {
-	                name: "aman",
-	                email: "akleoaman@gmail.com",
-	                thumbnail: "https://randomuser.me/api/portraits/men/34.jpg"
-	            }]
+	            members: [],
+	            loading: false,
+	            administrators: []
 	        };
+	        _this.makeAdmin = _this.makeAdmin.bind(_this);
+	        _this.removeAdmin = _this.removeAdmin.bind(_this);
 	        return _this;
 	    }
 
 	    _createClass(MemberList, [{
+	        key: 'componentWillUpdate',
+	        value: function componentWillUpdate(nextProps) {
+	            this.style = { backgroundColor: nextProps.admin ? 'green' : 'purple' };
+	        }
+	    }, {
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate(prevProps) {
+	            console.log(prevProps.name + ' updated', prevProps.admin, this.props.admin);
+	        }
+	    }, {
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var _this2 = this;
+
+	            this.setState({ loading: true });
+	            (0, _isomorphicFetch2.default)('https://api.randomuser.me/?nat=US&results=12').then(function (response) {
+	                return response.json();
+	            }).then(function (json) {
+	                return json.results;
+	            }).then(function (members) {
+	                return _this2.setState({
+	                    members: members,
+	                    loading: false
+	                });
+	            });
+	        }
+	    }, {
+	        key: 'makeAdmin',
+	        value: function makeAdmin(email) {
+	            var administrators = [].concat(_toConsumableArray(this.state.administrators), [email]);
+	            this.setState({ administrators: administrators });
+	        }
+	    }, {
+	        key: 'removeAdmin',
+	        value: function removeAdmin(email) {
+	            var administrators = this.state.administrators.filter(function (adminEmail) {
+	                return adminEmail !== email;
+	            });
+	            this.setState({ administrators: administrators });
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var members = this.state.members;
+	            var _this3 = this;
+
+	            var _state = this.state,
+	                administrators = _state.administrators,
+	                members = _state.members,
+	                loading = _state.loading;
 
 	            return React.createElement(
 	                'div',
@@ -27500,13 +27530,31 @@
 	                    null,
 	                    'Society Members'
 	                ),
-	                members.map(function (data, i) {
-	                    return React.createElement(_Member2.default, _extends({ key: i,
-	                        onClick: function onClick(email) {
-	                            return console.log(email);
-	                        }
-	                    }, data));
-	                })
+	                loading ? React.createElement(
+	                    'span',
+	                    null,
+	                    'loading...'
+	                ) : React.createElement(
+	                    'span',
+	                    null,
+	                    members.length,
+	                    ' members'
+	                ),
+	                members.length ? members.map(function (member, i) {
+	                    return React.createElement(_Member2.default, { key: i,
+	                        admin: administrators.some(function (adminEmail) {
+	                            return adminEmail === member.email;
+	                        }),
+	                        name: member.name.first + ' ' + member.name.last,
+	                        email: member.email,
+	                        thumbnail: member.picture.thumbnail,
+	                        makeAdmin: _this3.makeAdmin,
+	                        removeAdmin: _this3.removeAdmin });
+	                }) : React.createElement(
+	                    'span',
+	                    null,
+	                    'Currently 0 Members '
+	                )
 	            );
 	        }
 	    }]);
@@ -28007,7 +28055,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -28027,55 +28075,82 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 	var Member = function (_Component) {
-		_inherits(Member, _Component);
+	  _inherits(Member, _Component);
 
-		function Member() {
-			_classCallCheck(this, Member);
+	  function Member() {
+	    _classCallCheck(this, Member);
 
-			return _possibleConstructorReturn(this, (Member.__proto__ || Object.getPrototypeOf(Member)).apply(this, arguments));
-		}
+	    return _possibleConstructorReturn(this, (Member.__proto__ || Object.getPrototypeOf(Member)).apply(this, arguments));
+	  }
 
-		_createClass(Member, [{
-			key: 'render',
-			value: function render() {
-				console.log("i am starting member rendering");
-				var _props = this.props,
-				    name = _props.name,
-				    thumbnail = _props.thumbnail,
-				    email = _props.email,
-				    admin = _props.admin,
-				    makeAdmin = _props.makeAdmin;
+	  _createClass(Member, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      this.style = {
+	        backgroundColor: 'gray'
+	      };
+	    }
+	  }, {
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nextProps) {
+	      this.style = {
+	        backgroundColor: nextProps.admin ? 'green' : 'purple'
+	      };
+	    }
+	  }, {
+	    key: 'shouldComponentUpdate',
+	    value: function shouldComponentUpdate(nextProps) {
+	      return this.props.admin !== nextProps.admin;
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          name = _props.name,
+	          thumbnail = _props.thumbnail,
+	          email = _props.email,
+	          admin = _props.admin,
+	          makeAdmin = _props.makeAdmin,
+	          removeAdmin = _props.removeAdmin;
 
-				return React.createElement(
-					'div',
-					{ className: 'member' },
-					React.createElement(
-						'h1',
-						null,
-						name,
-						' ',
-						admin ? React.createElement(_shield2.default, null) : null
-					),
-					React.createElement(
-						'a',
-						{ onClick: makeAdmin },
-						'Make Admin'
-					),
-					React.createElement('img', { src: thumbnail, alt: 'profile picture' }),
-					React.createElement(
-						'p',
-						null,
-						React.createElement(
-							'a',
-							{ href: 'mailto:' + email },
-							email
-						)
-					)
-				);
-			}
-		}]);
+	      return React.createElement(
+	        'div',
+	        { className: 'member', style: this.style },
+	        React.createElement(
+	          'h1',
+	          null,
+	          name,
+	          ' ',
+	          admin ? React.createElement(_shield2.default, null) : null
+	        ),
+	        admin ? React.createElement(
+	          'a',
+	          { onClick: function onClick() {
+	              return removeAdmin(email);
+	            } },
+	          'Remove Admin'
+	        ) : React.createElement(
+	          'a',
+	          { onClick: function onClick() {
+	              return makeAdmin(email);
+	            } },
+	          'Make Admin'
+	        ),
+	        React.createElement('img', { src: thumbnail, alt: 'profile picture' }),
+	        React.createElement(
+	          'p',
+	          null,
+	          React.createElement(
+	            'a',
+	            { href: 'mailto:' + email },
+	            email
+	          )
+	        )
+	      );
+	    }
+	  }]);
 
-		return Member;
+	  return Member;
 	}(_react.Component);
 
 	exports.default = Member;
